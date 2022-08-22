@@ -1,0 +1,19 @@
+{
+  "name": "mini-netflix-backend",
+  "version": "1.0.0",
+  "description": "Movies Fan. Browse movies collection",
+  "scripts": {
+    "start": "node main.js",
+    "build": "npx tsc",
+    "test": "npm test"
+  },
+  "author": "amish.faldu@kellton.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.18.1",
+    "swagger-ui-express": "4.5.0"
+  },
+  "devDependencies": {
+    "typescript": "4.7.4"
+  }
+}
