@@ -9,7 +9,7 @@ const setupServer = () => {
   setupSwagger(app);
 
   app.listen(appConfig.port, () => {
-    console.log(
+    console.info(
       `Application started on port: ${appConfig.port}. Visit http://localhost:${appConfig.port}/api-explorer for swagger api docs`,
     );
   });
