@@ -1,23 +1,18 @@
-import * as swaggerjsdoc from 'swagger-jsdoc';
-import * as swaggerui from 'swagger-ui-express';
 import { app } from './app';
 import { appConfig } from './config/application.config';
+import { setupSwagger } from './swagger';
 
-const swaggerDocument = swaggerjsdoc({
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      version: '1.0.0',
-      title: 'Mini Netflix Backend',
-      description: 'Apis to browse movies',
-    },
-  },
-  apis: ['./src/*.routes.js'],
-});
-app.use('/api-explorer', swaggerui.serve, swaggerui.setup(swaggerDocument));
+/**
+ * Start express server with pre-setup stuff and listening to a port
+ */
+const setupServer = () => {
+  setupSwagger(app);
 
-app.listen(appConfig.port, () => {
-  console.log(
-    `Application started on port: ${appConfig.port}. Visit http://localhost:${appConfig.port}/api-explorer for swagger api docs`,
-  );
-});
+  app.listen(appConfig.port, () => {
+    console.log(
+      `Application started on port: ${appConfig.port}. Visit http://localhost:${appConfig.port}/api-explorer for swagger api docs`,
+    );
+  });
+};
+
+setupServer();
