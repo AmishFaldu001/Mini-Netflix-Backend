@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { OGDBMovieIdResponseDto } from 'src/common/ogdb-api/dtos/ogdb-movie-id.response.dto';
+import { OGDBMovieIdResponseDto } from '../../common/ogdb-api/dtos/ogdb-movie-id.response.dto';
 import { appConfig } from '../../config/application.config';
 import { CustomHttpError } from '../utils/custom-http-error';
 import { OGDBMovieSearchResponseDto } from './dtos/ogdb-movie-search.response.dto';

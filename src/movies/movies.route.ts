@@ -11,6 +11,11 @@ const moviesService = new MoviesService(new OGBDApiService());
 /**
  * @openapi
  * components:
+ *  securitySchemes:
+ *    JwtToken:
+ *      type: apiKey
+ *      name: authorization
+ *      in: header
  *  schemas:
  *    MovieDto:
  *      type: object
@@ -32,15 +37,15 @@ const moviesService = new MoviesService(new OGBDApiService());
  *      - name: page
  *        in: query
  *        required: true
- *        type: number
+ *        schema:
+ *          type: number
  *      - name: name
  *        in: query
  *        required: true
- *        type: string
+ *        schema:
+ *          type: string
  *    tags:
  *      - Movie
- *    produces:
- *      - application/json
  *    responses:
  *      200:
  *        description: Successfully retrieves movies
@@ -147,7 +152,7 @@ moviesRouter.get(
  *          type: string
  *        Website:
  *          type: string
- * /movie/{movie-imdb-id}:
+ * /movie/{id}:
  *  get:
  *    description: Fetch movie by id
  *    parameters:
@@ -155,11 +160,10 @@ moviesRouter.get(
  *        description: imdb id of the movie
  *        in: path
  *        required: true
- *        type: string
+ *        schema:
+ *          type: string
  *    tags:
  *      - Movie
- *    produces:
- *      - application/json
  *    responses:
  *      200:
  *        description: Successfully retrieves movies

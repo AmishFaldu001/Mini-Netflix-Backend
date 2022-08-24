@@ -58,6 +58,7 @@ const swaggerBasicAuth = () => {
  */
 export const setupSwagger = (app: Express) => {
   const swaggerDocument = swaggerjsdoc({
+    failOnErrors: true,
     definition: {
       openapi: '3.0.0',
       info: {
@@ -65,6 +66,7 @@ export const setupSwagger = (app: Express) => {
         title: 'Mini Netflix Backend',
         description: 'Apis to browse movies',
       },
+      security: [{'JwtToken': []}]
     },
     apis: ['./dist/**/*.route.js'],
   });
