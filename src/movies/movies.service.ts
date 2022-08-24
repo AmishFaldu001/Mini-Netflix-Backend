@@ -42,6 +42,8 @@ export class MoviesService {
       id,
     );
 
+    // Remove response field as it is not a necessary field to send
+    delete movie.Response;
     return movie;
   }
 }

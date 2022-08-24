@@ -1,8 +1,8 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { ExpandedMovieDto } from 'src/movies/dtos/expanded-movie.dto';
+import { OGDBMovieIdResponseDto } from 'src/common/ogdb-api/dtos/ogdb-movie-id.response.dto';
 import { appConfig } from '../../config/application.config';
-import { MovieSearchDto } from '../../movies/dtos/movie-search.dto';
 import { CustomHttpError } from '../utils/custom-http-error';
+import { OGDBMovieSearchResponseDto } from './dtos/ogdb-movie-search.response.dto';
 
 /**
  * OGDB api service class connects and fetches data from the ogdb api
@@ -25,7 +25,7 @@ export class OGBDApiService {
   public async fetchMoviesByName(
     movieName: string,
     page: number,
-  ): Promise<MovieSearchDto> {
+  ): Promise<OGDBMovieSearchResponseDto> {
     let response: AxiosResponse<any, any>;
 
     try {
@@ -58,7 +58,7 @@ export class OGBDApiService {
    * Fetches movie by id from ogbd api
    * @returns A movie if found else throws error
    */
-  public async fetchMovieById(id: string): Promise<ExpandedMovieDto> {
+  public async fetchMovieById(id: string): Promise<OGDBMovieIdResponseDto> {
     let response: AxiosResponse<any, any>;
 
     try {

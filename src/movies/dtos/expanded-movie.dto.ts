@@ -6,7 +6,9 @@ interface Rating {
 export interface ExpandedMovieDto {
   Title: string;
   Year: number;
+  Rated: string;
   Released: string;
+  Runtime: string;
   Genre: string;
   Director: string;
   Writer: string;
@@ -17,9 +19,13 @@ export interface ExpandedMovieDto {
   Awards: string;
   Poster: string;
   Ratings: Rating[];
+  Metascore: string;
   imdbRating: string;
   imdbVotes: string;
   imdbID: string;
-  BoxOffice: string;
   Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
 }
