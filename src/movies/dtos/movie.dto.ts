@@ -1,6 +1,6 @@
 export interface MovieDto {
   Title: string;
-  Year: number;
+  Year: string;
   Poster: string;
   imdbID: string;
   Type: string;
