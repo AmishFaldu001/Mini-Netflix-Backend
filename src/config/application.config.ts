@@ -26,8 +26,16 @@ process.env = {
  */
 export const appConfig = {
   port: process.env.PORT,
+
   swaggerAuth: {
     username: process.env.SWAGGER_AUTH_USERNAME,
     password: process.env.SWAGGER_AUTH_PASSWORD,
+  },
+
+  jwtSecretToken: process.env.JWT_SECRET_TOKEN,
+
+  omdb: {
+    baseUrl: process.env.OMDB_BASE_URL,
+    apiKey: process.env.OMDB_API_KEY,
   },
 };
