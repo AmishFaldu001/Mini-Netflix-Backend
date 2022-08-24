@@ -1,10 +1,4 @@
-interface MovieDto {
-  Title: string;
-  Year: number;
-  Poster: string;
-  imdbID: string;
-  Type: string;
-}
+import { MovieDto } from "../movie.dto";
 
 export interface FetchMoviesByNameResponseDto {
   movies: MovieDto[];

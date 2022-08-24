@@ -1,6 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import { ExpandedMovieDto } from 'src/movies/dtos/expanded-movie.dto';
 import { appConfig } from '../../config/application.config';
-import { MovieSearchDto } from '../../movies/dtos/movie.dto';
+import { MovieSearchDto } from '../../movies/dtos/movie-search.dto';
 import { CustomHttpError } from '../utils/custom-http-error';
 
 /**
@@ -16,24 +17,23 @@ export class OGBDApiService {
   }
 
   /**
-   * Fetches movie by name from ogbd api
+   * Fetch movies by name from ogbd api
    * @param movieName - Name of the movie to search for
-   * @returns A movie if it is found else undefined
+   * @param page - Page number for pagination
+   * @returns A list of movies if found else throws error
    */
-  public async fetchMoviesByName(movieName: string): Promise<MovieSearchDto> {
+  public async fetchMoviesByName(
+    movieName: string,
+    page: number,
+  ): Promise<MovieSearchDto> {
+    let response: AxiosResponse<any, any>;
+
     try {
       console.info(
         'ogdb-api.service : fetchMoviesByName : Fetching movie with name = ',
         movieName,
       );
-      const response = await this.axiosInstance.get(`&s=${movieName}`);
-      if (response.data?.Error?.includes('Movie not found')) {
-        throw new CustomHttpError({
-          message: 'Movie not found!!',
-          statuscode: 400,
-        });
-      }
-      return response.data;
+      response = await this.axiosInstance.get(`&s=${movieName}&page=${page}`);
     } catch (error) {
       console.error(
         'ogdb-api.service : fetchMoviesByName : Error while fetching movies : ',
@@ -44,5 +44,46 @@ export class OGBDApiService {
         statuscode: 500,
       });
     }
+
+    if (response.data?.Response === 'False') {
+      throw new CustomHttpError({
+        message: response.data.Error,
+        statuscode: 400,
+      });
+    }
+    return response.data;
+  }
+
+  /**
+   * Fetches movie by id from ogbd api
+   * @returns A movie if found else throws error
+   */
+  public async fetchMovieById(id: string): Promise<ExpandedMovieDto> {
+    let response: AxiosResponse<any, any>;
+
+    try {
+      console.info(
+        'ogdb-api.service : fetchMovieById : Fetching movie for id = ',
+        id,
+      );
+      response = await this.axiosInstance.get(`&i=${id}`);
+    } catch (error) {
+      console.error(
+        'ogdb-api.service : fetchMovieById : Error while fetching movie : ',
+        error,
+      );
+      throw new CustomHttpError({
+        message: 'Error while fetching movies',
+        statuscode: 500,
+      });
+    }
+
+    if (response.data?.Response === 'False') {
+      throw new CustomHttpError({
+        message: response.data.Error,
+        statuscode: 400,
+      });
+    }
+    return response.data;
   }
 }
